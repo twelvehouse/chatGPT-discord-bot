@@ -75,7 +75,8 @@ class discordClient(discord.Client):
             author = message.author.id
         try:
             response = await self.handle_response(user_message)
-            response_content = f'> **{user_message}** - <@{str(author)}> \n\n{response}'
+            response_content = f'{response}'
+            # response_content = f'> **{user_message}** - <@{str(author)}> \n\n{response}'
             await send_split_message(self, response_content, message)
         except Exception as e:
             logger.exception(f"Error while sending : {e}")
@@ -89,7 +90,7 @@ class discordClient(discord.Client):
                 logger.info(f"Send system prompt with size {len(self.starting_prompt)}")
 
                 response = await self.handle_response(self.starting_prompt)
-                await channel.send(f"{response}")
+                # await channel.send(f"{response}")
 
                 logger.info(f"System prompt response: {response}")
             else:
